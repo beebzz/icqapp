@@ -10,6 +10,10 @@
 Rails.application.eager_load!
 
 User.create!(:email => 'jsommers@colgate.edu', :admin => true)
+User.create!(:email => 'bboussayoud@colgate.edu', :admin => true)
+User.create!(:email => 'gkong@colgate.edu', :admin => true)
+User.create!(:email => 'wyi@colgate.edu', :admin => true)
+User.create!(:email => 'jjakovleski@colgate.edu', :admin => true)
 c101 = Course.create!(:name => 'COSC101S20', :daytime => 'TR 8:30-9:45')
 attendance101 = AttendanceQuestion.create!(:qname => "Attendance check in", :course => c101)
 
