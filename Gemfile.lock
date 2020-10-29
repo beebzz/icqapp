@@ -300,7 +300,7 @@ DEPENDENCIES
   omniauth-rails_csrf_protection (~> 0.1)
   pg
   puma (~> 3.11)
-  rails (>= 6.0.2.1)
+  rails (~> 6.0.3.3)
   rails-controller-testing
   rspec
   rspec-rails
