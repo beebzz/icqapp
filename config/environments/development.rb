@@ -62,6 +62,7 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.active_storage.service = :local
+  config.hosts << "f98310a2d88149b8b2a38e7877ab0e34.vfs.cloud9.us-east-1.amazonaws.com"
 
 #  config.action_mailer.delivery_method = :smtp
 #  config.action_mailer.smtp_settings = {
