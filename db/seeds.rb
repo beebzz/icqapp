@@ -31,11 +31,14 @@ std101.each do |email|
   c101.students << std
 end
 
-exit
 
 puts "#{c301}"
 std301 = %w{
+<<<<<<< HEAD
 joakim.jakovleski@gmail.com
+=======
+bilal.boussayoud@gmail.com
+>>>>>>> fdab8b15d931e31a30d7ee0e97c079168d8d25bf
 }
 
 std301.each do |email|
