@@ -37,6 +37,11 @@ FactoryBot.define do
     type { "NumericQuestion" }
   end
 
+  factory :attendance_question do
+    qname { "take attendance" }
+    type { "AttendanceQuestion" }
+  end
+
   factory :free_response_question do
     qname { "a free response question" }
     type { "FreeResponseQuestion" }
