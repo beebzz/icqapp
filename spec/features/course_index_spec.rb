@@ -73,7 +73,6 @@ RSpec.feature "CourseIndices", type: :feature do
       q.save
       visit attendance_report_path(c.id)
       expect(page.text).to match(/Attendance report/)
-      #expect(page).to have_button("Cold call")
     end
     
     it "should allow an admin to cold call students" do
@@ -81,11 +80,16 @@ RSpec.feature "CourseIndices", type: :feature do
       admin = FactoryBot.create(:admin)
       sign_in admin
       c = FactoryBot.create(:course)
+      q = FactoryBot.build(:attendance_question)
+      c.questions << q
+      q.save
       c.students << s
       visit attendance_report_path(c.id)
       expect(page).to have_button("Cold call")
       click_on("Cold call")
-      expect(page.text).to match(/student\d+@colgate.edu/)
+      # Assumes we have an element with ID cold-call-student
+      chosen_student = page.find("#cold-call-student").text
+      expect(chosen_student).to match(/student\d+@colgate.edu/)
     end
   end
 end
