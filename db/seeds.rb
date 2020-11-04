@@ -22,7 +22,6 @@ attendance301 = AttendanceQuestion.create!(:qname => "Attendance check in", :cou
 
 std101 = %w{
 sommersmeister@gmail.com
-joakim.jakovleski@gmail.com
 }
 
 puts "#{c101}"
@@ -34,11 +33,8 @@ end
 
 puts "#{c301}"
 std301 = %w{
-<<<<<<< HEAD
-joakim.jakovleski@gmail.com
-=======
 bilal.boussayoud@gmail.com
->>>>>>> fdab8b15d931e31a30d7ee0e97c079168d8d25bf
+joakim.jakovleski@gmail.com
 }
 
 std301.each do |email|
