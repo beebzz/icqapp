@@ -185,6 +185,11 @@ class CoursesController < ApplicationController
    # http://localhost:3000/x?q=What%20will%20these%20rules%20do?&c=COSC101S19&n=4`
   end
 
+def cold_call
+  # still doesn't figure out how to not call a student more than once in a round of calls!!
+  return @course.students.sample
+end
+
 private
   def go_to_current_course
     return if request.xhr?
