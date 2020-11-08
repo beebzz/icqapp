@@ -187,7 +187,10 @@ class CoursesController < ApplicationController
 
 def cold_call
   # still doesn't figure out how to not call a student more than once in a round of calls!!
-  return @course.students.sample
+  @course = Course.find(params[:id])
+  @cold_call = @course.students.sample
+  flash[:notice] = "You should ask #{@cold_call.email}."
+  redirect_to attendance_report_path and return
 end
 
 private
