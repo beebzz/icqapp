@@ -1,16 +1,17 @@
 %h3= "Attendance report for #{@course.name}"
-%table.table-striped.table-bordered
-  %tr
-    %td.small Date
-    -@course.students.each do |s|
-      %th
-        %p.vertical_orientation= s.email
-    %td.small Total
-  -@attendance_matrix.each do |row|
+%div{:style => "text-align: center;"}
+  %table.table-striped.table-bordered.position-relative
     %tr
-      %td.small= "#{row[0]}"
-      -row[1..].each do |val|
-        %td.small= "#{val}"
-%div
-  %a= link_to "Cold Call", cold_call_path, :method => :get
+      %td.small Date
+      -@course.students.each do |s|
+        %th
+          %p.vertical_orientation= s.email
+      %td.small Total
+    -@attendance_matrix.each do |row|
+      %tr
+        %td.small= "#{row[0]}"
+        -row[1..].each do |val|
+          %td.small= "#{val}"
+  %a= link_to "Cold Call", cold_call_path, :method => :get, :class => "btn btn-primary btn-sm"
+
   

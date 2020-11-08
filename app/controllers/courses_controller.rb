@@ -186,10 +186,18 @@ class CoursesController < ApplicationController
   end
 
 def cold_call
-  # still doesn't figure out how to not call a student more than once in a round of calls!!
   @course = Course.find(params[:id])
-  @cold_call = @course.students.sample
-  flash[:notice] = "You should ask #{@cold_call.email}."
+  #keep track of all students who haven't been cold called yet
+  session[:uncalled_students] = [] unless !session[:uncalled_students].nil?
+  if session[:uncalled_students].length == 0
+      @course.students.each do |s|
+          session[:uncalled_students] << s.email
+      end
+  end
+  #ensure that students aren't cold-called again until everyone else in the class has
+  @cold_call = session[:uncalled_students].sample
+  session[:uncalled_students].delete(@cold_call)
+  flash[:notice] = "Try asking #{@cold_call}."
   redirect_to attendance_report_path and return
 end
 
