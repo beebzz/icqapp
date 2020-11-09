@@ -35,6 +35,8 @@ puts "#{c301}"
 std301 = %w{
 bilal.boussayoud@gmail.com
 joakim.jakovleski@gmail.com
+blazzing710@gmail.com
+leetlegk@gmail.com
 }
 
 std301.each do |email|
