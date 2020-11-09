@@ -1,6 +1,6 @@
 #qcard.card
   .card-body
-    %h3#squestion.card-title{"data-ids" => "#{@course.id} #{@qid} #{@pid}"}= @qname 
+    %h3#squestion.card-title{"data-ids" => "#{@course.id} #{@qid} #{@pid}"}= @qname
     %h4.card-subtitle= @qprompt
     -if @question.image.attached?
       .card-img-top= image_tag @question.image.variant(resize: "480x480^"), :class => "imgwide"
@@ -8,8 +8,13 @@
     .card-text
       =form_for @response, :method => :post, :url => course_question_poll_poll_responses_path(@course, @question, @poll), :remote => true do
         .form-group
+        -if @question.type != "AttendanceQuestion"
           =question_input(@question, @current) 
+          =submit_tag @question.prompt          
+        -else
+          Testing ...
           =submit_tag @question.prompt
+
 #noqcard.card.hidden
   .card-body
     %h3.card-title{"data-ids" => "#{@course.id} #{@qid} #{@pid}"}
