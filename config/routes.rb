@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   get '/courses/:id/status', :to => 'courses#status', :as => :course_status, :action => 'status', :controller => 'courses'
   get '/polls/:id/notify', :to => 'polls#notify', :as => :poll_notify, :action => 'notify', :controller => 'polls'
   post '/courses/:course_id/take_attendance', :to => 'courses#take_attendance', :as => :course_attendance, :action => 'take_attendance', :controller => 'courses'
-  post '/courses/:id/attendance_report/cold_call', :to => 'courses#cold_call', :as => :cold_call, :action => 'cold_call', :controller => 'courses'
+  get '/courses/:id/attendance_report/cold_call', :to => 'courses#cold_call', :as => :cold_call, :action => 'cold_call', :controller => 'courses'
   
   get '/x', :to => 'courses#create_and_activate'
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
