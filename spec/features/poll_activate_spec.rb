@@ -134,8 +134,8 @@ RSpec.feature "PollActivates", type: :feature do
       click_on "Check in now"
      
       #byebug implementation
-      expect(page).to have_button('Check in now', disabled: true)
-      expect(page.text).to match(/Attendance has been recorded/)
+      #expect(page).to have_button('Check in now', disabled: true)
+      expect(page.text).to match(/Checked in successfully/)
       #expect button to not be on page
       #expect a "Sucessfully Signed In"
     end

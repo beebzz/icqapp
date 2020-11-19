@@ -11,6 +11,7 @@ class PollsController < ApplicationController
     @course = Course.find(params[:course_id])
     @question = Question.find(params[:question_id])
     @poll = Poll.find(params[:id])
+
     if request.xhr?
         render json: { responses: @poll.responses, type: @poll.type, answer: @poll.question.answer } and return
     end
