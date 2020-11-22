@@ -27,7 +27,7 @@ module QuestionsHelper
   end
 
   def question_types
-    %w{MultiChoiceQuestion NumericQuestion FreeResponseQuestion}
+    %w{MultiChoiceQuestion NumericQuestion FreeResponseQuestion MultiSelQuestion}
   end
 
   def question_input(q, currresponse)
@@ -50,6 +50,20 @@ module QuestionsHelper
         number_field_tag :response, curr, :step => 0.01, :class => "form-control"
       when "FreeResponseQuestion"
         text_field_tag :response, curr, :class => "form-control"
+      when "MultiSelQuestion"
+        s = ""
+        q.qcontent.each do |opt|
+           h = {:class => "form-check-input"}
+          # FIXME: doesn't work
+          if opt==curr 
+            h[:checked]='checked'
+          end
+          #should allow multiple selection of answers
+          t = check_box_tag('response', opt, **h)
+          t += label_tag(opt)
+          s = s + "<div class='form-check'>" + t + "</div>"
+        end
+        s.html_safe
     end
   end
 

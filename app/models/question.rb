@@ -44,6 +44,21 @@ class MultiChoiceQuestion < Question
   end
 end
 
+class MultiSelQuestion < Question
+  serialize :qcontent, Array  
+  def qcontent
+    read_attribute(:qcontent) || write_attribute(:qcontent, [])
+  end
+  
+  def new_poll(h={})
+    Poll.new(:type => "MultiSelPoll", :question => self, **h)
+  end
+  
+  def prompt
+    "Select one(s) that best answers this question"
+  end
+end
+
 class FreeResponseQuestion < Question
   def new_poll(h={})
     Poll.new(:type => "FreeResponsePoll", :question => self, **h)
