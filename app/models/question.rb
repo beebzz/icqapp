@@ -27,8 +27,8 @@ protected
   end
   
   def answer_for_multichoice
-    if not qcontent.include? answer
-      errors.add(answer, "not in the offered answers")
+    if type == "MultiChoiceQuestion" and not qcontent.include? answer
+      errors.add(:answer, "Not in the offered answers")
     end
   end
 
