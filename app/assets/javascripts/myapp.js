@@ -305,6 +305,28 @@ var ICQ = (function() {
             jQuery("#showanswer").on('click', function() {
                 jQuery(".answer").toggle();
             });
+            
+            //Create-question form handlers
+            jQuery(".add_field_button").click(function(e){ //on add input button click
+                e.preventDefault();
+                jQuery('.input_fields_wrap').append('<div><input class="option_input" type="text" name="question[option]"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
+            });
+
+            jQuery(".input_fields_wrap").on("click",".remove_field", function(e){ //user click on remove text
+                e.preventDefault(); 
+                jQuery(this).parent('div').remove();
+            });
+            
+            jQuery(".save_fields_button").click(function(e){
+                e.preventDefault();
+                options = []
+                jQuery("input[type=text].option_input").each(function(){
+                    options.push(jQuery(this).val());
+                });
+                jQuery("#qcontent").val(options.join("\n"));
+            });
+            
+            
             jQuery("#new_free_response_poll_response").on('ajax:success', student_response_handler);
             jQuery("#new_multi_choice_poll_response").on('ajax:success', student_response_handler);
             jQuery("#new_numeric_response_poll_response").on('ajax:success', student_response_handler);

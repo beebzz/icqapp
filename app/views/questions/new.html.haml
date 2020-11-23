@@ -5,19 +5,37 @@
       =f.label :qname, "Question text:"
       =f.text_field :qname
       %br
+      
       =f.label :type, "Question type:"
       =f.select :type, question_types
       %br
-      =f.label :qcontent, "Options:"
-      =f.text_area :qcontent
+      
+      //=f.label :qcontent, "Options:"
+      =f.text_area :qcontent, :style => "display:none", :id => "qcontent"
       %br
+      
+      =f.label :qadd, "Add options:"
+      %button.add_field_button Add an option
+      
+      //this div is needed for adding the jQuery inputs
+      .input_fields_wrap
+      %br
+      
+      =f.label :qsave, "Save options:"
+      %button.save_fields_button Save current options
+      %br
+      
       =f.label :answer, 'Answer:'
       =f.text_field :answer
       %br
+      
       =f.label :image, "Image"
       =f.file_field :image, :accept => 'image/png,image/gif,image/jpeg,image/pdf'
       %br
+      
       =f.submit "Create question"
-
   #bottom
     =link_to "Back to question index", course_questions_path(@course)
+    
+    
+    //#display Hello?
