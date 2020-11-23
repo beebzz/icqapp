@@ -277,11 +277,6 @@ var ICQ = (function() {
         setTimeout(monitor_question_status, 1000, ids);
     };
 
-    var add_option_textbox = function(){
-        console.log("Am here");
-        jQuery("#display").innerHTML = jQuery("#display").innerHTML + "got here!";
-    };
-
     return {
         init: function() {
             jQuery("#question_type").on('change', function() {
@@ -311,27 +306,24 @@ var ICQ = (function() {
                 jQuery(".answer").toggle();
             });
             
-            
-            jQuery(document).ready(function() {
+            //Create-question form handlers
+            jQuery(".add_field_button").click(function(e){ //on add input button click
+                e.preventDefault();
+                jQuery('.input_fields_wrap').append('<div><input class="option_input" type="text" name="question[option]"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
+            });
 
-                jQuery(".add_field_button").click(function(e){ //on add input button click
-                    e.preventDefault();
-                    jQuery('.input_fields_wrap').append('<div><input class="option_input "type="text" name="mytext[]"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
+            jQuery(".input_fields_wrap").on("click",".remove_field", function(e){ //user click on remove text
+                e.preventDefault(); 
+                jQuery(this).parent('div').remove();
+            });
+            
+            jQuery(".save_fields_button").click(function(e){
+                e.preventDefault();
+                options = []
+                jQuery("input[type=text].option_input").each(function(){
+                    options.push(jQuery(this).val());
                 });
-    
-                jQuery(".input_fields_wrap").on("click",".remove_field", function(e){ //user click on remove text
-                    e.preventDefault(); 
-                    jQuery(this).parent('div').remove();
-                });
-                
-                jQuery(".save_fields_button").click(function(e){
-                    e.preventDefault();
-                    options = []
-                    jQuery("input[type=text].option_input").each(function(){
-                        options.push(jQuery(this).val());
-                    });
-                    jQuery("#qcontent").val(options.join("\n"));
-                });
+                jQuery("#qcontent").val(options.join("\n"));
             });
             
             
