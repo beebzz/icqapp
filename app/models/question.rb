@@ -4,6 +4,7 @@ class Question < ApplicationRecord
   validates :qname, presence: true
   validates_associated :course
   validate :options_for_multichoice
+  validate :options_for_multisel
   enum content_type: %i(html markdown plain)
   has_one_attached :image
 
@@ -23,6 +24,12 @@ protected
   def options_for_multichoice
     if type == "MultiChoiceQuestion" and qcontent.length < 2
       errors.add(:qcontent, "missing newline-separated options for multichoice question")
+    end
+  end
+  
+  def options_for_multisel
+    if type == "MultiSelQuestion" and qcontent.length < 2
+      errors.add(:qcontent, "missing newline-separated options for multiselection question")
     end
   end
 
@@ -45,7 +52,8 @@ class MultiChoiceQuestion < Question
 end
 
 class MultiSelQuestion < Question
-  serialize :qcontent, Array  
+  serialize :qcontent, Array
+  
   def qcontent
     read_attribute(:qcontent) || write_attribute(:qcontent, [])
   end

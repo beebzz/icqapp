@@ -287,7 +287,7 @@ var ICQ = (function() {
     return {
         init: function() {
             jQuery("#question_type").on('change', function() {
-                if (jQuery("#question_type").val() == "MultiChoiceQuestion") {
+                if (jQuery("#question_type").val() == "MultiChoiceQuestion" || "MultiSelQuestion") {
                     jQuery("#question_qcontent").show();
                 } else {
                     jQuery("#question_qcontent").hide();
@@ -316,6 +316,7 @@ var ICQ = (function() {
             //look up an element by id, on creates event handler
             jQuery("#new_free_response_poll_response").on('ajax:success', student_response_handler);
             jQuery("#new_multi_choice_poll_response").on('ajax:success', student_response_handler);
+            jQuery("#new_multi_sel_poll_response").on('ajax:success', student_response_handler);
             jQuery("#new_numeric_response_poll_response").on('ajax:success', student_response_handler);
             jQuery("#responsesync").on('ajax:success', drawresponse);
             //attendance button modified code

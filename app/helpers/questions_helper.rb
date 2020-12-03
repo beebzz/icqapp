@@ -22,7 +22,7 @@ module QuestionsHelper
   def question_icon(t)
     t =~ /^(\w+)Question$/ 
     t = $1.downcase.to_sym
-    icons = {'multichoice': 'list-ordered', 'numeric': 'graph', 'freeresponse': 'quote'}
+    icons = {'multichoice': 'list-ordered', 'numeric': 'graph', 'freeresponse': 'quote', 'multisel': 'list-ordered'}
     icons[t]
   end
 

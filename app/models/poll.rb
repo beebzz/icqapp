@@ -32,7 +32,7 @@ end
 
 class MultiSelPoll < Poll
   def new_response(h={})
-    PollResponse.new(:type => "MultiSelResponse", :poll => self, **h)
+    PollResponse.new(:type => "MultiSelPollResponse", :poll => self, **h)
   end
 
   def options
