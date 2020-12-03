@@ -40,4 +40,4 @@ yarn.lock
 *.dump.gz
 
 # Ignore setup shell script.
-/start_icq.sh
+start_icq.sh
