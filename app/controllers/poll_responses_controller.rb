@@ -26,11 +26,16 @@ class PollResponsesController < ApplicationController
     else
       flash[:notice] = "Saving response failed"
     end
+    #original code
+    if request.xhr?
+      render json: {:message => "Response recorded" } and return
+    else
+      redirect_to course_path(@course) and return
   
-    respond_to do |format|
-      format.js
-      format.json { render :message => "Response recorded" }
-      format.html { render course_path(@course) and return }
+    #respond_to do |format|
+    #  format.js
+    #  format.json { render :message => "Response recorded" }
+    #  format.html { render course_path(@course) and return }
     end
     
   end
