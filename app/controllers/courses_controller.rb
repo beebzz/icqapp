@@ -191,6 +191,22 @@ class CoursesController < ApplicationController
    # http://localhost:3000/x?q=What%20will%20these%20rules%20do?&c=COSC101S19&n=4`
   end
 
+def cold_call
+  @course = Course.find(params[:id])
+  #keep track of all students who haven't been cold called yet
+  session[:uncalled_students] = [] unless !session[:uncalled_students].nil?
+  if session[:uncalled_students].length == 0
+      @course.students.each do |s|
+          session[:uncalled_students] << s.email
+      end
+  end
+  #ensure that students aren't cold-called again until everyone else in the class has
+  @cold_call = session[:uncalled_students].sample
+  session[:uncalled_students].delete(@cold_call)
+  flash[:notice] = "Try asking #{@cold_call}."
+  redirect_to attendance_report_path and return
+end
+
 private
   def go_to_current_course
     return if request.xhr?

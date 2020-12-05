@@ -5,6 +5,7 @@ class Question < ApplicationRecord
   validates_associated :course
   validate :options_for_multichoice
   validate :options_for_multisel
+  validate :options_for_multichoice, :answer_for_multichoice
   enum content_type: %i(html markdown plain)
   has_one_attached :image
 
@@ -26,10 +27,16 @@ protected
       errors.add(:qcontent, "missing newline-separated options for multichoice question")
     end
   end
-  
+
   def options_for_multisel
     if type == "MultiSelQuestion" and !qcontent.length
       errors.add(:qcontent, "missing newline-separated options for multiselection question")
+    end
+  end
+
+  def answer_for_multichoice
+    if type == "MultiChoiceQuestion" and not qcontent.include? answer
+      errors.add(:answer, "Not in the offered answers")
     end
   end
 
