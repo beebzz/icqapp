@@ -26,7 +26,7 @@ class PollResponsesController < ApplicationController
     else
       flash[:notice] = "Saving response failed"
     end
-    #original code
+    
     if request.xhr?
       render json: {:message => "Response recorded" } and return
     else

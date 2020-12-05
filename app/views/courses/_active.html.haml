@@ -17,7 +17,6 @@
           #atd.form-group
             =submit_tag @question.prompt, :onclick => "this.disabled=true; this.value='Checked in successfully'; document.getElementById('disp').innerHTML='<img src=https://i.kym-cdn.com/photos/images/original/000/465/838/d83.jpg width = 200px>'; "
             %p#disp
-            /=submit_tag @question.prompt, :onclick => "this.innerHTML='These are the steps to get your PIN number: Bla bla blah'"
 #noqcard.card.hidden
   .card-body
     %h3.card-title{"data-ids" => "#{@course.id} #{@qid} #{@pid}"}
