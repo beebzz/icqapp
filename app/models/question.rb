@@ -3,7 +3,7 @@ class Question < ApplicationRecord
   has_many :polls, :dependent => :destroy
   validates :qname, presence: true
   validates_associated :course
-  validate :options_for_multichoice, :answer_for_multichoice
+  validate :options_for_multichoice
   enum content_type: %i(html markdown plain)
   has_one_attached :image
 
@@ -21,14 +21,8 @@ class Question < ApplicationRecord
 
 protected
   def options_for_multichoice
-    if type == "MultiChoiceQuestion" and qcontent.length < 2
+    if type == "MultiChoiceQuestion" and !qcontent.length
       errors.add(:qcontent, "missing newline-separated options for multichoice question")
-    end
-  end
-  
-  def answer_for_multichoice
-    if type == "MultiChoiceQuestion" and not qcontent.include? answer
-      errors.add(:answer, "Not in the offered answers")
     end
   end
 
