@@ -85,11 +85,43 @@ RSpec.feature "CourseIndices", type: :feature do
       q.save
       c.students << s
       visit attendance_report_path(c.id)
-      expect(page).to have_button("Cold call")
-      click_on("Cold call")
-      # Assumes we have an element with ID cold-call-student
-      chosen_student = page.find("#cold-call-student").text
-      expect(chosen_student).to match(/student\d+@colgate.edu/)
+      expect(page).to have_text("Cold Call")
+      click_on("Cold Call")
+      # Flash appears with cold called student
+      expect(page.text).to match(/Try asking student\d+@colgate.edu/)
     end
+    
+    it "should not choose the same student twice before all are chosen" do
+      s1 = FactoryBot.create(:student)
+      s2 = FactoryBot.create(:student)
+      s3 = FactoryBot.create(:student)
+      admin = FactoryBot.create(:admin)
+      sign_in admin
+      c = FactoryBot.create(:course)
+      q = FactoryBot.build(:attendance_question)
+      c.questions << q
+      q.save
+      c.students << s1
+      c.students << s2
+      c.students << s3
+      visit attendance_report_path(c.id)
+      expect(page).to have_text("Cold Call")
+      student_pool = [s1.email, s2.email, s3.email]
+      all_emails = [s1.email, s2.email, s3.email]
+      # Declaring the times like this so it can be repurposed for n elements if need be
+      all_emails.length.times do 
+        click_on("Cold Call")
+        expect(page.text).to match(/Try asking student\d+@colgate.edu/)
+        # Bit of a magic number here - the last n elements will always be all of the emails in order
+        curr_email = page.text.gsub(/^((?!student\d+@colgate.edu).)*$/, " ").split[0...-(all_emails.length)]
+        student_pool.each do |email|
+          if curr_email.join.include? email
+            student_pool.delete email
+          end
+        end
+      end
+      expect(student_pool).to eq([])
+    end
+    
   end
 end

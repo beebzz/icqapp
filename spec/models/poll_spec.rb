@@ -88,7 +88,7 @@ RSpec.describe Poll, type: :model do
 
     it "should give a hash of responses for multichoice polls" do
       c = FactoryBot.create(:course)
-      q = FactoryBot.create(:multi_choice_question, :course => c, :qcontent => %w{one two three})
+      q = FactoryBot.create(:multi_choice_question, :course => c, :qcontent => %w{one two three}, :answer => "one")
       p = q.new_poll(:round => 1, :isopen => false)
       q.save!
       1.upto(10) do |i|

@@ -38,10 +38,10 @@ class QuestionsController < ApplicationController
 
 private
   def create_params
-    p = params.require(:question).permit(:qname, :type, :qcontent, :content_type, :answer, :image)
+    p = params.require(:question).permit(:qname, :type, :qcontent, :content_type, :image)
     # reform qcontent into an array
     if p[:qcontent]
-      p[:qcontent] = p[:qcontent].split.collect { |s| s.strip }
+      p[:qcontent] = p[:qcontent].split("\n").collect { |s| s.strip }
     end
     p
   end

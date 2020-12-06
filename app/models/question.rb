@@ -21,7 +21,7 @@ class Question < ApplicationRecord
 
 protected
   def options_for_multichoice
-    if type == "MultiChoiceQuestion" and qcontent.length < 2
+    if type == "MultiChoiceQuestion" and !qcontent.length
       errors.add(:qcontent, "missing newline-separated options for multichoice question")
     end
   end
