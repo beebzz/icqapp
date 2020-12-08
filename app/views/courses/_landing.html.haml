@@ -1,0 +1,16 @@
+#landing_page
+  %h2 Where do you want to go?
+  
+  #attendance
+    =form_for @course, method: :get do |f|
+      =hidden_field(:course, :attendance_poll, :value => "true")
+      =hidden_field(:course, :landing, :value => "false")
+      =f.submit "Take attendance", :class => "btn btn-primary"
+    
+  %br
+    
+  #question
+    =form_for @course, method: :get do |f|
+      =hidden_field(:course, :question_poll, :value => "true")
+      =hidden_field(:course, :landing, :value => "false")
+      =f.submit "Do a question", :class => "btn btn-primary"
