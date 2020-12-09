@@ -17,6 +17,7 @@ RSpec.feature "PollActivates", type: :feature do
       c.students << student
       sign_in student
       visit course_path(c)
+      click_on "Do a question"
       expect(page.text).to match(/Q1/)
       fill_in "response", :with => 1.0
       click_on "Submit answer"
@@ -53,6 +54,7 @@ RSpec.feature "PollActivates", type: :feature do
       c.students << student
       sign_in student
       visit course_path(c)
+      click_on "Do a question"
       expect(page.text).to match(/Q1/)
       fill_in "response", :with => "some text"
       click_on "Submit answer"
@@ -72,6 +74,7 @@ RSpec.feature "PollActivates", type: :feature do
       c.students << student
       sign_in student
       visit course_path(c)
+      click_on "Do a question"
       expect(page.text).to match(/Q1/)
       choose "response_two"
       click_on "Submit answer"
@@ -91,6 +94,7 @@ RSpec.feature "PollActivates", type: :feature do
       c.students << student
       sign_in student
       visit course_path(c)
+      click_on "Do a question"
       expect(page.text).to match(/Q1/)
       choose "response_two"
       click_on "Submit answer"
@@ -115,8 +119,7 @@ RSpec.feature "PollActivates", type: :feature do
       c.students << student
       sign_in student
       visit course_path(c)
-     
-      #byebug implementation
+      click_on "Take attendance"
       expect(page.text).to match(/Attendance Poll/)
       expect(page).to have_button("Check in now")
     end
@@ -132,11 +135,9 @@ RSpec.feature "PollActivates", type: :feature do
       c.students << student
       sign_in student
       visit course_path(c)
+      click_on "Take attendance"
       click_on "Check in now"
-     
-      #byebug implementation
-      expect(page).to have_button('Check in now', disabled: true)
-      expect(page.text).to match(/Attendance has been recorded/)
+      expect(page.text).to match(/Response recorded/)
       #expect button to not be on page
       #expect a "Sucessfully Signed In"
     end
@@ -153,6 +154,7 @@ RSpec.feature "PollActivates", type: :feature do
       c.students << student
       sign_in student
       visit course_path(c)
+      click_on "Do a question"
       expect(page.text).to match(/no question/i)
     end      
   end
