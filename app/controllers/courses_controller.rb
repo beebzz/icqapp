@@ -29,6 +29,10 @@ class CoursesController < ApplicationController
         @qid = 0
         @qname = ""
       end
+      if !params[:course]
+        params[:course] = {}
+        params[:course][:landing] = "true"
+      end
       @activepoll = !!@poll
       render 'show_student'
     else

@@ -1,11 +1,30 @@
 #main
-  -if @activepoll
-    =render :partial => "active"
+  -if params[:course][:landing] == "true"
+    =render :partial => "landing"
+    
+  -elsif params[:course][:attendance_poll] == "true"
+    -if @activepoll and @question.type == "AttendanceQuestion" 
+      =render :partial => "active"
+    -else
+      =render :partial => "noactive"
+      
+  -elsif params[:course][:question_poll] == "true"
+    -if @activepoll and @question.type != "AttendanceQuestion"
+      =render :partial => "active"
+    -else
+      =render :partial => "noactive"
+      
   -else
-    =render :partial => "noactive"
-
+    =render :partial => "landing"
+    
   %br
   %p#refresh= link_to "Refresh", course_path(@course), :class => "btn btn-primary"
+  
+  #landing
+    =form_for @course, method: :get do |f|
+      =hidden_field(:course, :landing, :value => "true")
+      =f.submit "Back to landing page", :class => "btn btn-primary"
+    
 
   #bottom
 
