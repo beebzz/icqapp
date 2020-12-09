@@ -213,6 +213,8 @@ var ICQ = (function() {
       jQuery("#jsflash").addClass("alert");
       jQuery("#jsflash").addClass("alert-info");
       jQuery("#jsflash").fadeTo(500, 0.5);
+      
+      /* find some element on screen by id then modifying.*/
     };
 
     var drawresponse = function(ev) {
@@ -276,6 +278,11 @@ var ICQ = (function() {
 
         setTimeout(monitor_question_status, 1000, ids);
     };
+    
+    //new attendance button function
+    //var attendance_button_handler = function() {
+        
+    //};
 
     return {
         init: function() {
@@ -307,6 +314,8 @@ var ICQ = (function() {
             });
             
             //New question form handlers
+            //look up an element by id, on creates event handler
+            //Create-question form handlers
             jQuery(".add_field_button").click(function(e){ //on add input button click
                 e.preventDefault();
                 jQuery('.input_fields_wrap').append('<div><input class="option_input" type="text" name="question[option]"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
@@ -331,6 +340,8 @@ var ICQ = (function() {
             jQuery("#new_multi_choice_poll_response").on('ajax:success', student_response_handler);
             jQuery("#new_numeric_response_poll_response").on('ajax:success', student_response_handler);
             jQuery("#responsesync").on('ajax:success', drawresponse);
+            //attendance button modified code
+            //jQuery("new_attendence_poll_response").on('ajax:success', attendance_button_handler);
             if (document.getElementById("squestion") !== null) {
                 var ids = jQuery("#squestion").attr('data-ids').split(/ /);
                 if (ids.length == 3) {

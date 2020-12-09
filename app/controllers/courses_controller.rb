@@ -36,7 +36,13 @@ class CoursesController < ApplicationController
       @activepoll = !!@poll
       render 'show_student'
     else
+      #if @question.type != "AttendanceQuestion" 
       redirect_to course_questions_path(@course) and return
+      #else
+      #respond_to do |format|
+      # format.html {redirect_to course_questions_path(@course) }
+      #  format.js
+      #end
     end
   end
 

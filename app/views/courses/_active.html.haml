@@ -5,16 +5,18 @@
     -if @question.image.attached?
       .card-img-top= image_tag @question.image.variant(resize: "480x480^"), :class => "imgwide"
     %hr
-    .card-text
-      =form_for @response, :method => :post, :url => course_question_poll_poll_responses_path(@course, @question, @poll), :remote => true do
-        .form-group
-        -if @question.type != "AttendanceQuestion"
-          =question_input(@question, @current) 
-          =submit_tag @question.prompt          
-        -else
-          Testing ...
-          =submit_tag @question.prompt
-
+    -if @question.type != "AttendanceQuestion"
+      .card-text
+        =form_for @response, :method => :post, :url => course_question_poll_poll_responses_path(@course, @question, @poll), :remote => true do
+          .form-group
+            =question_input(@question, @current) 
+            =submit_tag @question.prompt          
+    -else
+      .card-text
+        =form_for @response, :method => :post, :url => course_question_poll_poll_responses_path(@course, @question, @poll), :remote => true do
+          #atd.form-group
+            =submit_tag @question.prompt, :onclick => "this.disabled=true; this.value='Checked in successfully'; document.getElementById('disp').innerHTML='<img src=https://i.kym-cdn.com/photos/images/original/000/465/838/d83.jpg width = 200px>'; "
+            %p#disp
 #noqcard.card.hidden
   .card-body
     %h3.card-title{"data-ids" => "#{@course.id} #{@qid} #{@pid}"}

@@ -137,9 +137,8 @@ RSpec.feature "PollActivates", type: :feature do
       visit course_path(c)
       click_on "Take attendance"
       click_on "Check in now"
-      expect(page.text).to match(/Response recorded/)
-      #expect button to not be on page
-      #expect a "Sucessfully Signed In"
+     
+      expect(page).to have_button('Checked in successfully', disabled: true)
     end
 
     it "no poll should be visible if none are active" do

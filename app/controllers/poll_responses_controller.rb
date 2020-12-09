@@ -14,7 +14,8 @@ class PollResponsesController < ApplicationController
       flash[:alert] = "Poll is not open"
       redirect_to course_path(@course) and return
     end
-
+    
+    
     r = @poll.poll_responses.where(:user => current_user).first
     if !r
       r = @poll.new_response(:user => current_user)
@@ -25,10 +26,17 @@ class PollResponsesController < ApplicationController
     else
       flash[:notice] = "Saving response failed"
     end
+    
     if request.xhr?
       render json: {:message => "Response recorded" } and return
     else
       redirect_to course_path(@course) and return
+  
+    #respond_to do |format|
+    #  format.js
+    #  format.json { render :message => "Response recorded" }
+    #  format.html { render course_path(@course) and return }
     end
+    
   end
 end
