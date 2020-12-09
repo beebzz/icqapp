@@ -7,6 +7,9 @@ end
 class MultiChoicePollResponse < PollResponse
 end
 
+class MultiSelPollResponse < PollResponse
+end
+
 class FreeResponsePollResponse < PollResponse
 end
 

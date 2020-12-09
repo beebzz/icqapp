@@ -52,4 +52,10 @@ FactoryBot.define do
     type { "MultiChoiceQuestion" }
     qcontent { %w{one two three four} }
   end
+  factory :multi_sel_question do
+    qname { "a multiple selection question" }
+    type { "MultiSelQuestion" }
+    qcontent { %w{one two three four} }
+  end
+  
 end

@@ -30,6 +30,27 @@ class MultiChoicePoll < Poll
   end
 end
 
+class MultiSelPoll < Poll
+  def new_response(h={})
+    PollResponse.new(:type => "MultiSelPollResponse", :poll => self, **h)
+  end
+
+  def options
+    self.question.qcontent
+  end
+
+  def responses
+    outhash = {}
+    h = self.poll_responses.group(:response).count
+    opts = self.question.qcontent
+    0.upto(opts.length-1) do |i|
+      outhash[opts[i]] = h[opts[i]].to_i
+    end
+    outhash
+  end
+end
+    
+
 class FreeResponsePoll < Poll
   def new_response(h={})
     PollResponse.new(:type => "FreeResponsePollResponse", :poll => self, **h)

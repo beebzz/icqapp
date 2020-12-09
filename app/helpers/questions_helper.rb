@@ -22,12 +22,12 @@ module QuestionsHelper
   def question_icon(t)
     t =~ /^(\w+)Question$/ 
     t = $1.downcase.to_sym
-    icons = {'multichoice': 'list-ordered', 'numeric': 'graph', 'freeresponse': 'quote'}
+    icons = {'multichoice': 'list-ordered', 'numeric': 'graph', 'freeresponse': 'quote', 'multisel': 'list-ordered'}
     icons[t]
   end
 
   def question_types
-    %w{MultiChoiceQuestion NumericQuestion FreeResponseQuestion}
+    %w{MultiChoiceQuestion NumericQuestion FreeResponseQuestion MultiSelQuestion}
   end
 
   def question_input(q, currresponse)
@@ -50,6 +50,20 @@ module QuestionsHelper
         number_field_tag :response, curr, :step => 0.01, :class => "form-control"
       when "FreeResponseQuestion"
         text_field_tag :response, curr, :class => "form-control"
+      when "MultiSelQuestion"
+        s = ""
+        q.qcontent.each do |opt|
+           h = {:class => "form-check-input"}
+          # FIXME: doesn't work
+          if opt==curr 
+            h[:checked]='checked'
+          end
+          #should allow multiple selection of answers
+          t = check_box_tag('response', opt, false, **h)
+          t += label_tag(opt)
+          s = s + "<div class='form-check'>" + t + "</div>"
+        end
+        s.html_safe
     end
   end
 
