@@ -103,6 +103,27 @@ RSpec.feature "PollActivates", type: :feature do
       expect(PollResponse.find(1).response).to eq("four")
     end
     
+    it "an active multiple selection question should be visible" do
+      c = FactoryBot.create(:course)
+      q = FactoryBot.build(:multi_sel_question, :qname => "Q1", :qcontent => %w{one two three four}, :course => c)
+      c.questions << q
+      q.save
+      p = q.new_poll(:isopen => true, :round => 1)
+      p.save
+
+      student = FactoryBot.create(:student)
+      c.students << student
+      sign_in student
+      visit course_path(c)
+      expect(page.text).to match(/Q1/)
+      choose "response_two"
+      choose "response_four"
+      click_on "Select one(s) that best answers this question"
+      expect(page.current_path).to eq(course_path(c))
+      expect(PollResponse.find(1).response).to eq("two")
+      expect(PollResponse.find(1).response).to eq("four")
+    end
+    
     it "an active attendance poll should be visible" do
       c = FactoryBot.create(:course)
       q = FactoryBot.build( :attendance_question, :qname => "Attendance Poll", :course => c)

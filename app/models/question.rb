@@ -47,7 +47,7 @@ class MultiChoiceQuestion < Question
   end
 
   def prompt
-    "Select one option"
+    "Submit answer"
   end
 end
 
