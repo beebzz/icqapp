@@ -1,9 +1,10 @@
 require 'rails_helper'
+require 'webdrivers'
 
 RSpec.feature "NewQuestions", type: :feature do
   include Devise::Test::IntegrationHelpers
 
-  describe "create a new question" do
+  describe "create a new question", js: true do
     before (:each) do
       admin = FactoryBot.create(:admin)
       sign_in admin
@@ -25,7 +26,7 @@ RSpec.feature "NewQuestions", type: :feature do
       select "MultiChoiceQuestion", from: "question_type"
       click_on "Create question"
       expect(page.current_path).to eq(new_course_question_path(@c))
-      expect(page.text).to match(/qcontent missing newline-separated options for multichoice question/i)
+      expect(page.text).to match(/No question created: Qcontent missing newline-separated options for multichoice question/i)
     end
 
     it "should succeed if qname is included for numeric response" do
@@ -53,8 +54,13 @@ RSpec.feature "NewQuestions", type: :feature do
       visit course_questions_path(@c)
       click_on "Create a new question"
       fill_in "question_qname", :with => "NEWQ"
-      fill_in "question_qcontent", :with => "a\nb\nc"
-      select "MultiChoiceQuestion", from: "question_type"
+      click_on "Add an option"
+      all('input[class="option_input"]')[0].set("a")
+      click_on "Add an option"
+      all('input[class="option_input"]')[1].set("b")
+      click_on "Add an option"
+      all('input[class="option_input"]')[2].set("b")
+      click_on "Save current options"
       click_on "Create question"
       expect(page.current_path).to eq(course_questions_path(@c))
       expect(page.text).to match(/NEWQ/)

@@ -4,8 +4,11 @@ class Question < ApplicationRecord
   validates :qname, presence: true
   validates_associated :course
   validate :options_for_multichoice
+<<<<<<< HEAD
   validate :options_for_multisel
   validate :options_for_multichoice, :answer_for_multichoice
+=======
+>>>>>>> origin/master
   enum content_type: %i(html markdown plain)
   has_one_attached :image
 

@@ -313,7 +313,7 @@ var ICQ = (function() {
                 jQuery(".answer").toggle();
             });
             
-            //Create-question form handlers
+            //New question form handlers
             jQuery(".add_field_button").click(function(e){ //on add input button click
                 e.preventDefault();
                 jQuery('.input_fields_wrap').append('<div><input class="option_input" type="text" name="question[option]"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
