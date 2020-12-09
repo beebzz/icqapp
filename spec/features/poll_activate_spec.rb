@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'webdrivers'
 
 RSpec.feature "PollActivates", type: :feature do
   include Devise::Test::IntegrationHelpers

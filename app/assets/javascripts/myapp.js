@@ -313,6 +313,7 @@ var ICQ = (function() {
                 jQuery(".answer").toggle();
             });
             
+            //New question form handlers
             //look up an element by id, on creates event handler
             //Create-question form handlers
             jQuery(".add_field_button").click(function(e){ //on add input button click
