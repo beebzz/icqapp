@@ -52,6 +52,8 @@ group :development, :test do
   gem 'capybara'
   gem 'rails-controller-testing'
   gem 'database_cleaner-active_record'
+  gem 'selenium-webdriver'
+  gem 'webdrivers', '~> 4.0', require: false
 end
 
 group :development do
