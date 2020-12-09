@@ -59,7 +59,7 @@ module QuestionsHelper
             h[:checked]='checked'
           end
           #should allow multiple selection of answers
-          t = check_box_tag('response', opt, **h)
+          t = check_box_tag('response', opt, false, **h)
           t += label_tag(opt)
           s = s + "<div class='form-check'>" + t + "</div>"
         end
