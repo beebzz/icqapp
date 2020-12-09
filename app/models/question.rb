@@ -30,6 +30,7 @@ protected
   def options_for_multisel
     if type == "MultiSelQuestion" and !qcontent.length
       errors.add(:qcontent, "missing newline-separated options for multiselection question")
+
     end
   end
 

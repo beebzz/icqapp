@@ -334,6 +334,7 @@ var ICQ = (function() {
             });
             
             
+
             jQuery("#new_free_response_poll_response").on('ajax:success', student_response_handler);
             jQuery("#new_multi_choice_poll_response").on('ajax:success', student_response_handler);
             jQuery("#new_multi_sel_poll_response").on('ajax:success', student_response_handler);
